@@ -428,10 +428,6 @@ FROM Voyageur v
 LEFT JOIN Logement l ON l.lieu = v.region
 WHERE l.lieu IS NULL;
 
--- =========================================
--- Pour aller plus loin
--- =========================================
-
 -- 52. Voyageurs + nombre total de jours passés en séjour (fin - debut)
 SELECT v.idVoyageur, v.nom, v.prenom,
        COALESCE(SUM(s.fin - s.debut), 0) AS joursTotal
@@ -462,3 +458,4 @@ JOIN Sejour s ON v.idVoyageur = s.idVoyageur
 JOIN Logement l ON s.codeLogement = l.code
 GROUP BY v.idVoyageur, v.nom, v.prenom
 HAVING COUNT(DISTINCT l.lieu) = (SELECT COUNT(DISTINCT lieu) FROM Logement);
+
